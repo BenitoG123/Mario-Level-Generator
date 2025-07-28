@@ -367,6 +367,9 @@ def generate_successors(population):
     return results
 
 def ga():
+    max_generations = 10
+    fitness_threshold = 700
+
     # STUDENT Feel free to play with this parameter
     pop_limit = 480
     # Code to parallelize some computations
@@ -405,7 +408,8 @@ def ga():
                             f.write("".join(row) + "\n")
                 generation += 1
                 # STUDENT Determine stopping condition
-                stop_condition = False
+                best = max(population, key=Individual.fitness)
+                stop_condition = generation >= max_generations or best.fitness() >= fitness_threshold
                 if stop_condition:
                     break
                 # STUDENT Also consider using FI-2POP as in the Sorenson & Pasquier paper
